@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import java.util.List;
@@ -31,6 +32,7 @@ public class Lesson1Application extends Application {
 
     private Button btnDeseneazaLinie;
     private Button btnDeseneazaDreptunghi;
+    private Button polygonDrawingBtn;
     private Button deleteEverythingBtn;
 
     @Override
@@ -48,7 +50,7 @@ public class Lesson1Application extends Application {
         panouDesenare.setStyle("-fx-background-color: #ffffff");
         panou.setCenter(panouDesenare);
 
-        Scene scene = new Scene(panou, 350, 250);
+        Scene scene = new Scene(panou, 530, 250);
 
         primaryStage.setTitle("Aplicatie JAVA FX 01");
         primaryStage.setScene(scene);
@@ -63,6 +65,9 @@ public class Lesson1Application extends Application {
         btnDeseneazaDreptunghi.setOnAction(event -> {
             dreptunghiDeseneazaSetOnAction();
         });
+        polygonDrawingBtn.setOnAction(event -> {
+            drawPolygonSetOnAction();
+        });
         deleteEverythingBtn.setOnAction(event -> {
             deleteEverything();
         });
@@ -72,11 +77,32 @@ public class Lesson1Application extends Application {
         panouDesenare.getChildren().clear();
     }
 
-    private void linieDeseneazaSetOnAction() {
-        denseneazaLinie(panouDesenare, 20, 30, 320, 200, 3, Color.RED);
+    private void drawPolygonSetOnAction() {
+        // Create the polygon object
+        Polygon polygon = new Polygon();
+
+        // Setting its coordinates
+        polygon.getPoints().addAll(new Double[]{
+                10.0, 200.0,
+                90.0, 150.0,
+                150.0, 200.0,
+        });
+
+        // Playing with its colors
+        polygon.setFill(Color.CRIMSON);
+        polygon.setStroke(Color.BLACK);
+        polygon.setStrokeWidth(2.0);
+
+        // Adding it to the AnchorPane
+        panouDesenare.getChildren().add(polygon);
     }
 
-    public void denseneazaLinie(AnchorPane panou, int x1, int y1, int x2, int y2, int grosimea, Color color) {
+
+    private void linieDeseneazaSetOnAction() {
+        drawLine(panouDesenare, 20, 30, 320, 200, 3, Color.RED);
+    }
+
+    public void drawLine(AnchorPane panou, int x1, int y1, int x2, int y2, int grosimea, Color color) {
         Line line = new Line(x1, y1, x2, y2);
         line.setStrokeWidth(grosimea);
         line.setStroke(color);
@@ -84,10 +110,10 @@ public class Lesson1Application extends Application {
     }
 
     private void dreptunghiDeseneazaSetOnAction() {
-        deseneazaDreptunghi(panouDesenare, 180, 40, 150, 50, Color.AQUAMARINE);
+        drawRectangle(panouDesenare, 330, 40, 150, 50, Color.AQUAMARINE);
     }
 
-    private void deseneazaDreptunghi(AnchorPane panouDesenare, int x, int y, int width, int height, Color color) {
+    private void drawRectangle(AnchorPane panouDesenare, int x, int y, int width, int height, Color color) {
         // Creating the rectangle
         Rectangle rectangle = new Rectangle(x, y, width, height);
 
@@ -110,14 +136,15 @@ public class Lesson1Application extends Application {
         panouComponente.setSpacing(7);
         panouComponente.setPadding(new Insets(5));
 
-        btnDeseneazaLinie = creeazaButon("Make a line");
-        btnDeseneazaDreptunghi = creeazaButon("Make a rectangle");
-        deleteEverythingBtn = creeazaButon("Delete everything");
+        btnDeseneazaLinie = createButton("Make a line");
+        btnDeseneazaDreptunghi = createButton("Make a rectangle");
+        polygonDrawingBtn = createButton("Make a polygon");
+        deleteEverythingBtn = createButton("Delete everything");
 
-        panouComponente.getChildren().addAll(btnDeseneazaLinie, btnDeseneazaDreptunghi, deleteEverythingBtn);
+        panouComponente.getChildren().addAll(btnDeseneazaLinie, btnDeseneazaDreptunghi, polygonDrawingBtn, deleteEverythingBtn);
     }
 
-    private Button creeazaButon(String title) {
+    private Button createButton(String title) {
         Button btn = new Button();
         btn.setText(title);
         return btn;
