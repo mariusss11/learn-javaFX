@@ -1,27 +1,18 @@
 package com.example.javafx;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import java.util.List;
 
-import java.io.IOException;
-import java.util.stream.Collectors;
-
-import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 
 public class Lesson1Application extends Application {
 
